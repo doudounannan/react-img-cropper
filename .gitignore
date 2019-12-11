@@ -109,3 +109,6 @@ uploadedImg/
 
 # webpack output
 examples/static/js/
+
+# vscode settings
+.vscode/
