@@ -2,8 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import AntdUploadCropper from './src/AntdUploadCropper';
-
-import './index.less';
+import InputCropper from './src/InputCropper';
 
 let imgUri = '';
 
@@ -14,10 +13,21 @@ if (!true) {
 
 const App = () => {
 	return (
-		<div className='app'>
-			<div className='demo__item'>
+		<div
+			style={{
+				padding: '20px',
+				display: 'flex',
+				justifyContent: 'space-between'
+			}}
+		>
+			<div style={{ width: '45%' }}>
 				<h2>antd Upload</h2>
 				<AntdUploadCropper imgUri={imgUri} />
+			</div>
+
+			<div style={{ width: '45%' }}>
+				<h2>input Upload</h2>
+				<InputCropper imgUri={imgUri} />
 			</div>
 		</div>
 	);

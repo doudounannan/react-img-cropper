@@ -13,7 +13,9 @@ type EnhancedFile = File & { [key: string]: string | boolean | number };
 
 interface Props {
 	uploadedImgBase64: string;
-	uploadedImgFile: RcFile;
+	// TODO
+	// uploadedImgFile: RcFile;
+	uploadedImgFile: any;
 	setCroppedImgBlob(data: Blob): void;
 	setCroppedImgObjectURL(data: string): void;
 	previewText?: string;
@@ -136,7 +138,7 @@ class ReactImgCropper extends PureComponent<Readonly<Props>, State> {
 					/>
 				)}
 
-				{showPreviewText && <h4>{previewText ?? '预览'}</h4>}
+				{showPreviewText && <h4>{previewText || '预览'}</h4>}
 
 				{croppedImageObjectURL && (
 					<img

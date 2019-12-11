@@ -2,7 +2,7 @@ module.exports = {
 	entry: `${__dirname}/index.tsx`,
 	output: {
 		filename: 'bundle.js',
-		path: `${__dirname}/dist`
+		path: `${__dirname}/static/js`
 	},
 	mode: 'development',
 	devtool: 'source-map',

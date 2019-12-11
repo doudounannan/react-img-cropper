@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
-import { Upload, Icon, Button } from 'antd';
+import { Upload, Icon, Button, message } from 'antd';
 
 import { RcFile } from 'antd/lib/upload';
 
 import ReactImgCropper from '../../src/ReactImgCropper';
 
 import 'antd/dist/antd.css';
-import './AntdUploadCropper.less';
 
 interface Props {
 	imgUri?: string;
@@ -39,7 +38,9 @@ const AntdUploadCropper: React.FC<Readonly<Props>> = (props: Props) => {
 	const { imgUri } = props;
 
 	useEffect(() => {
-		setFinalImgUri(imgUri);
+		if (imgUri) {
+			setFinalImgUri(imgUri);
+		}
 	}, [imgUri]);
 
 	const beforeUpload = (file: RcFile) => {
@@ -53,7 +54,20 @@ const AntdUploadCropper: React.FC<Readonly<Props>> = (props: Props) => {
 	};
 
 	const onUpload = () => {
-		console.log('debug-onUpload');
+		const formData: FormData = new FormData();
+
+		formData.append('image', croppedImgBlob, uploadedImgFile?.name);
+
+		fetch('http://localhost:4000/uploader', {
+			method: 'POST',
+			body: formData
+		})
+			.then((res: Response) => res.json())
+			.then((data: { code: number }) => {
+				if (data.code === 0) {
+					setFinalImgUri(croppedImgObjectURL);
+				}
+			});
 	};
 
 	return (
@@ -61,33 +75,35 @@ const AntdUploadCropper: React.FC<Readonly<Props>> = (props: Props) => {
 			<Upload
 				name='image'
 				listType='picture-card'
-				className='img__uploader'
 				showUploadList={false}
 				beforeUpload={beforeUpload}
 				accept={'.jpg,.jpeg,.png'}
 			>
 				{finalImgUri && (
-					<img className='img--preview' src={finalImgUri} alt='头像' />
+					<img
+						style={{ width: '100px', height: '100px' }}
+						src={finalImgUri}
+						alt='头像'
+					/>
 				)}
 
 				{!finalImgUri && (
 					<div>
 						<Icon type='plus' />
-						<div className='upload__text'>上传头像</div>
+						<div>上传头像</div>
 					</div>
 				)}
 			</Upload>
 
-			<div className='cropper__wrapper'>
-				<ReactImgCropper
-					uploadedImgBase64={uploadedImgBase64}
-					uploadedImgFile={uploadedImgFile}
-					setCroppedImgBlob={setCroppedImgBlob}
-					setCroppedImgObjectURL={setCroppedImgObjectURL}
-				/>
-			</div>
+			<ReactImgCropper
+				uploadedImgBase64={uploadedImgBase64}
+				uploadedImgFile={uploadedImgFile}
+				setCroppedImgBlob={setCroppedImgBlob}
+				setCroppedImgObjectURL={setCroppedImgObjectURL}
+				showPreviewText
+			/>
 
-			<Button type='primary' onClick={onUpload} className='upload__btn'>
+			<Button type='primary' onClick={onUpload} style={{ marginTop: '20px' }}>
 				确定
 			</Button>
 		</>
