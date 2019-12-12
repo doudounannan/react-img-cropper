@@ -1,0 +1,5 @@
+- es & umd imported module bundle
+- umd error
+- doc
+- error
+- ts declare

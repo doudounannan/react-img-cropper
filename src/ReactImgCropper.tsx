@@ -4,8 +4,6 @@ import ReactCrop, { Crop } from 'react-image-crop';
 
 import 'react-image-crop/dist/ReactCrop.css';
 
-import './ReactImgCropper.less';
-
 import { RcFile } from 'antd/lib/upload';
 
 // TODO
@@ -31,7 +29,6 @@ class ReactImgCropper extends PureComponent<Readonly<Props>, State> {
 	public state = {
 		croppedImageObjectURL: '',
 		crop: {
-			// TODO
 			unit: '%' as '%' | 'px',
 			width: 30,
 			aspect: 1
