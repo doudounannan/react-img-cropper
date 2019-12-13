@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { PureComponent } from 'react';
+// @ts-ignore
 import ReactCrop, { Crop } from 'react-image-crop';
 
 import 'react-image-crop/dist/ReactCrop.css';

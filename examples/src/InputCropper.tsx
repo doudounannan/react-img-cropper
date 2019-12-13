@@ -50,7 +50,7 @@ const uploadCropper: React.FC<Readonly<Props>> = (props: Props) => {
 	const onUpload = () => {
 		const formData: FormData = new FormData();
 
-		formData.append('image', croppedImgBlob, uploadedImgFile?.name);
+		formData.append('image', croppedImgBlob, uploadedImgFile.name);
 
 		fetch('http://localhost:4000/uploader', {
 			method: 'POST',
