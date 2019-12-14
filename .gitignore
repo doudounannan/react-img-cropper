@@ -122,3 +122,5 @@ es/
 
 # doc
 doc/
+
+.DS_Store

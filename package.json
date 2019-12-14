@@ -13,7 +13,7 @@
     "examples:debug": "npm run examples:dev && npm run examples:server",
     "examples": "npm run examples:build && npm run examples:server",
     "build": "rollup -c",
-    "docs": "typedoc --mode file --out doc"
+    "docs": "typedoc"
   },
   "files": [
     "es",

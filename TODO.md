@@ -1,4 +1,2 @@
-- es & umd imported module bundle
+- bundle exclude imported module
 - umd error
-- doc
-- ts declare
